@@ -1,4 +1,4 @@
-package october25;
+package com.ramaselvathangamm.patternprograms;
 
 import java.util.Scanner;
 

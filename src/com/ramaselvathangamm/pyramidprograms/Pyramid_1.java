@@ -1,8 +1,8 @@
-package october25;
+package com.ramaselvathangamm.pyramidprograms;
 
 import java.util.Scanner;
 
-public class Pyramid_7 {
+public class Pyramid_1 {
 	public static void main(String args[]) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter the Number of Rows : ");
@@ -12,7 +12,7 @@ public class Pyramid_7 {
 				System.out.print(" ");
 			}
 			for (int j = 1; j <= i; j++) {
-				System.out.print(j+" ");
+				System.out.print(i+" ");
 			}
 			System.out.println();
 		}

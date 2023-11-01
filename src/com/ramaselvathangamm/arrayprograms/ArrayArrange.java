@@ -1,4 +1,4 @@
-package problems;
+package com.ramaselvathangamm.arrayprograms;
 
 import java.util.Arrays;
 import java.util.Scanner;

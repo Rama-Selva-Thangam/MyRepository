@@ -11,7 +11,6 @@ public class ReplaceElementsWithGCE {
 			arr[i] = max;
 			max = Math.max(max, temp);
 		}
-
 		return arr;
 	}
 

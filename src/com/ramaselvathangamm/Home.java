@@ -34,7 +34,6 @@ public class Home {
 
 			} else if (input > packages.size()) {
 				System.out.print("Enter an Valid Input");
-				continue;
 			} else if (input == -1) {
 				flag = false;
 			}
@@ -56,7 +55,7 @@ public class Home {
 		int index = 1;
 		System.out.println("Packages Present : ");
 		for (File f : fileList) {
-			System.out.println(index++ + ". " + f.getName());
+			System.out.println(index++ + ". " + f.getName().replace(".java",""));
 		}
 	}
 

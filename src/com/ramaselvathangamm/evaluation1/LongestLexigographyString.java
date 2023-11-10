@@ -21,7 +21,7 @@ public class LongestLexigographyString {
 			System.out.println(word);
 		}
 	}
-//XKDGTGA , HADF , DCBA
+
 	public static String sortLexoGraphical(String word) {
 		char[] c = word.toCharArray();
 		for (int i = 0; i < c.length; i++) {

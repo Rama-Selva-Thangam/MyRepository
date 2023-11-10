@@ -1,6 +1,5 @@
 package com.ramaselvathangamm.evaluation1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class WordPattern {
@@ -27,8 +26,11 @@ public class WordPattern {
 
 			}
 		}
-		for (char[] a : arr) {
-			System.out.println(Arrays.toString(a));
+		for(int k=0;k<arr.length;k++) {
+			for(int l=0;l<arr[0].length;l++) {
+				System.out.print(arr[k][l]+" ");
+			}
+			System.out.println();
 		}
 
 	}
@@ -45,19 +47,3 @@ public class WordPattern {
 	}
 
 }
-
-//Input : 
-//	word : ZOHOISHIRING
-//	row  : 3
-//Output :
-//	Z   I   R
-//	O O S I I G
-//	H   H   N
-//	
-//	Input : 
-//		word : ZOHOOOISHIRING
-//		row  : 4
-//		Z    I     N
-//		O  O S   I G
-//		H O  H R
-//		O    I

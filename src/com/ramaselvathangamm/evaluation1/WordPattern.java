@@ -5,12 +5,26 @@ import java.util.Scanner;
 
 public class WordPattern {
 	public static void printPattern(String word, int row) {
-		char[][] arr = new char[row][word.length() / 2];
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < word.length() / 2; j++) {
-				if (j == 0) {
-					arr[i][j] = word.charAt(i);
-				}
+		char[][] arr = new char[row][word.length()];
+		int i = 0;
+		int j = 0;
+		int index = 0;
+		boolean downward = false;
+		while (index < word.length()) {
+			arr[i][j] = word.charAt(index);
+			index++;
+			if (i == 0) {
+				downward = true;
+			} else if (i == row - 1) {
+				downward = false;
+			}
+			if (downward) {
+
+				i++;
+			} else {
+				i--;
+				j++;
+
 			}
 		}
 		for (char[] a : arr) {

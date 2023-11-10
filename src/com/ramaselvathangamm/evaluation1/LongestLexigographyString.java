@@ -8,16 +8,16 @@ public class LongestLexigographyString {
 		for (int i = 0; i < arr.length; i++) {
 			res[i] = sortLexoGraphical(arr[i]);
 		}
-		for(int i=0;i<res.length;i++) {
-			for(int j=i+1;j<res.length;j++) {
-				if(res[i].compareTo(res[j])<1) {
-					String temp=res[i];
-					res[i]=res[j];
-					res[j]=temp;
+		for (int i = 0; i < res.length; i++) {
+			for (int j = i + 1; j < res.length; j++) {
+				if (res[i].compareTo(res[j]) < 1) {
+					String temp = res[i];
+					res[i] = res[j];
+					res[j] = temp;
 				}
 			}
 		}
-		for(String word:res) {
+		for (String word : res) {
 			System.out.println(word);
 		}
 	}

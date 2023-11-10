@@ -18,7 +18,6 @@ public class WordPattern {
 				downward = false;
 			}
 			if (downward) {
-
 				i++;
 			} else {
 				i--;
@@ -26,9 +25,9 @@ public class WordPattern {
 
 			}
 		}
-		for(int k=0;k<arr.length;k++) {
-			for(int l=0;l<arr[0].length;l++) {
-				System.out.print(arr[k][l]+" ");
+		for (int k = 0; k < arr.length; k++) {
+			for (int l = 0; l < arr[0].length; l++) {
+				System.out.print(arr[k][l] + " ");
 			}
 			System.out.println();
 		}
@@ -47,3 +46,5 @@ public class WordPattern {
 	}
 
 }
+
+ 

@@ -3,7 +3,7 @@ package com.ramaselvathangamm.evaluation1;
 import java.util.Scanner;
 
 public class NumberPattern {
-	private static void spiralPattern(int rows) {
+	private static void spiralPattern(int rows) { // Old Code
 		int[][] arr = new int[rows][rows];
 		int top = 0;
 		int bottom = rows - 1;
@@ -39,7 +39,7 @@ public class NumberPattern {
 		}
 	}
 
-	public static void printTriangleSpiral(int n) { // New Code
+	public static void printTriangleSpiral(int n) {  // Updated Code
 		int[][] matrix = new int[n][n];
 		int number = 1;
 		int left = 0, right = n - 1, top = 0, bottom = n - 1;

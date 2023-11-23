@@ -1,5 +1,6 @@
 package com.ramaselvathangamm.evaluation1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JumbledNumber {
@@ -14,11 +15,38 @@ public class JumbledNumber {
 		return true;
 	}
 
+	public static boolean isJumbledNumber1(int number) {
+		char[] arr = Integer.toString(number).toCharArray();
+		for (int i = 0; i < arr.length - 1; i++) {
+			int digit1 = arr[i];
+			int digit2 = arr[i + 1];
+			if (Math.abs(digit1 - digit2) > 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isJumbledNumber2(int number) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while (number > 0) {
+			list.add(number % 10);
+			number /= 10;
+		}
+		for (int i = 0; i < list.size() - 1; i++) {
+			int rem = Math.abs(list.get(i) - list.get(i + 1));
+			if (rem > 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter the Number : ");
 		int number = scan.nextInt();
-		if (isJumbledNumber(number)) {
+		if (isJumbledNumber2(number)) {
 			System.out.print(number + " is a Jumbled Number");
 		} else {
 			System.out.println(number + " is not a Jumbled Number");

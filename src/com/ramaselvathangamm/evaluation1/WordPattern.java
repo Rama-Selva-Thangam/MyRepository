@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 public class WordPattern {
 	public static void printPattern(String word, int row) {
-		char[][] arr = new char[row][word.length()];
+		if (row == 1) {
+			System.out.println(word);
+			return;
+		}
+		char[][] arr = new char[row][word.length() / 2 + 1];
 		int i = 0;
 		int j = 0;
 		int index = 0;
@@ -46,5 +50,3 @@ public class WordPattern {
 	}
 
 }
-
- 

@@ -42,6 +42,7 @@ public class LongestLexigographyString {
 		int length = scan.nextInt();
 		scan.nextLine();
 		String[] arr = new String[length];
+		System.out.println("Enter the Strings : ");
 		for (int i = 0; i < length; i++) {
 			arr[i] = scan.nextLine();
 		}

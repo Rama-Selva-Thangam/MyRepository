@@ -6,7 +6,7 @@ import java.util.Stack;
 public class ValidExpression {
 	public static boolean isValidExpression(String word) {
 		word = word.toLowerCase();
-		String expressions = "+-*/%";
+		String expressions = "+-*/";
 		Stack<Character> braces = new Stack<Character>();
 
 		for (int i = 0; i < word.length(); i++) {

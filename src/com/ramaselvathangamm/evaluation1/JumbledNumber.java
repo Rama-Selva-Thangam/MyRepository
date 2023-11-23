@@ -9,7 +9,7 @@ public class JumbledNumber {
 			int secondReminder = (number / 10) % 10;
 			if (Math.abs(reminder - secondReminder) > 1)
 				return false;
-			number/=10;
+			number /= 10;
 		}
 		return true;
 	}

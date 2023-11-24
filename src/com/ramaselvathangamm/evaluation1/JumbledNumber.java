@@ -15,6 +15,21 @@ public class JumbledNumber {
 		return true;
 	}
 
+	public static boolean isJumbledNumberRecursive(int number) {
+		if (number == 0) {
+			return true;
+		}
+
+		int reminder = number % 10;
+		int secondReminder = (number / 10) % 10;
+
+		if (Math.abs(reminder - secondReminder) > 1) {
+			return false;
+		}
+
+		return isJumbledNumberRecursive(number / 10);
+	}
+
 	public static boolean isJumbledNumber1(int number) {
 		char[] arr = Integer.toString(number).toCharArray();
 		for (int i = 0; i < arr.length - 1; i++) {
@@ -46,7 +61,7 @@ public class JumbledNumber {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter the Number : ");
 		int number = scan.nextInt();
-		if (isJumbledNumber2(number)) {
+		if (isJumbledNumberRecursive(number)) {
 			System.out.print(number + " is a Jumbled Number");
 		} else {
 			System.out.println(number + " is not a Jumbled Number");

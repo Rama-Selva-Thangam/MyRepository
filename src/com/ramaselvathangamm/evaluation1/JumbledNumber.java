@@ -31,26 +31,28 @@ public class JumbledNumber {
 	}
 
 	public static boolean isJumbledNumber1(int number) {
+		int prevDigit = -1;
+
+		while (number > 0) {
+			int currentDigit = number % 10;
+
+			if (prevDigit != -1 && Math.abs(currentDigit - prevDigit) > 1) {
+				return false;
+			}
+
+			prevDigit = currentDigit;
+			number /= 10;
+		}
+
+		return true;
+	}
+
+	public static boolean isJumbledNumber2(int number) {
 		char[] arr = Integer.toString(number).toCharArray();
 		for (int i = 0; i < arr.length - 1; i++) {
 			int digit1 = arr[i];
 			int digit2 = arr[i + 1];
 			if (Math.abs(digit1 - digit2) > 1) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public static boolean isJumbledNumber2(int number) {
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		while (number > 0) {
-			list.add(number % 10);
-			number /= 10;
-		}
-		for (int i = 0; i < list.size() - 1; i++) {
-			int rem = Math.abs(list.get(i) - list.get(i + 1));
-			if (rem > 1) {
 				return false;
 			}
 		}

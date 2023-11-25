@@ -1,4 +1,4 @@
-package com.ramaselvathangamm.leetcode;
+package com.ramaselvathangamm.todaypractice;
 
 import java.util.Arrays;
 import java.util.Scanner;

@@ -45,7 +45,7 @@ public class StringArrayEquivalent {
 	public static void main(String[] args) {
 		String[] word1 = { "abc", "d", "defg" };
 		String[] word2 = { "abcddefg" };
-		boolean result = arrayStringsAreEqual2(word1, word2);
+		boolean result = arrayStringsAreEqual1(word1, word2);
 		System.out.println(result);
 	}
 

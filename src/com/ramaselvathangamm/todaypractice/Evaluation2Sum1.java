@@ -59,7 +59,7 @@ public class Evaluation2Sum1 {
 
 	public static void main(String[] args) {
 		int[] nums = { -1, 1, -3, 4, -1, 2, 1, -5, 4 };
-		int[] maxSubarray = findMaximumSubarray(nums);
+		int[] maxSubarray = findMaximumSubarray (nums);
 		System.out.println(Arrays.toString(maxSubarray));
 	}
 }

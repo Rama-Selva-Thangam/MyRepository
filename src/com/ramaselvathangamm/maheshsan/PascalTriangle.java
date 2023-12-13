@@ -23,6 +23,19 @@ public class PascalTriangle {
 		return list;
 	}
 
+	public static void printTriangle(List<List<Integer>> result) {
+		for (List<Integer> row : result) {
+			int numSpaces = result.size() - row.size();
+			for (int i = 0; i < numSpaces; i++) {
+				System.out.print(" ");
+			}
+			for (int value : row) {
+				System.out.print(value + " ");
+			}
+			System.out.println();
+		}
+	}
+
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter the number of Rows : ");
@@ -31,6 +44,8 @@ public class PascalTriangle {
 		for (List<Integer> li : result) {
 			System.out.println(li);
 		}
+		System.out.println();
+		printTriangle(result);
 	}
 
 }

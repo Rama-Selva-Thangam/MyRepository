@@ -27,17 +27,17 @@ public class DungeonGame {
 		return Math.abs(adventureX - goldX) + Math.abs(adventureY - goldY);
 	}
 
-	public static int minStepsWithMonster(char[][] plane, char adventure, char gold, char monster) {
-		int adventureStep = minSteps(plane, 'A', 'G');
-		int monsterStep = minSteps(plane, 'M', 'G');
+	public static int minStepsWithMonster(char[][] plane, char adventure, char gold) {
+		int adventureStep = minSteps(plane, adventure, gold);
+		int monsterStep = minSteps(plane, 'M', gold);
 		if (adventureStep > monsterStep) {
 			return -1;
 		}
 		return adventureStep;
 	}
 
-	public static List<List<Integer>> minStepPath(char[][] plane, char adventure, char gold, char monster) {
-		int steps = minStepsWithMonster(plane, adventure, gold, monster);
+	public static List<List<Integer>> minStepPath(char[][] plane, char adventure, char gold) {
+		int steps = minStepsWithMonster(plane, adventure, gold);
 		if (steps < 0) {
 			return null;
 		}
@@ -82,27 +82,27 @@ public class DungeonGame {
 		return result;
 	}
 
-	public static int minStepwithTrigger(char[][] plane, char adventure, char gold, char monster, char trigger) {
-		int adventureStep = minSteps(plane, 'A', 'G');
-		int monsterStep = minSteps(plane, 'M', 'G');
+	public static int minStepwithTrigger(char[][] plane, char adventure, char gold) {
+		int adventureStep = minSteps(plane, adventure, gold);
+		int monsterStep = minSteps(plane, 'M', gold);
 
 		if (adventureStep > monsterStep) {
-			adventureStep += minSteps(plane, 'G', 'T') - 1;
+			adventureStep += minSteps(plane, gold, 'T') - 1;
 		}
 		return adventureStep;
 	}
 
-	public static int minStepsWithPits(char[][] plane) {
+	public static int minStepsWithPits(char[][] plane, char adventure, char gold) {
 		int rows = plane.length;
 		int cols = plane[0].length;
 		int adventureX = -1, adventureY = -1;
 		int goldX = -1, goldY = -1;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				if (plane[i][j] == 'A') {
+				if (plane[i][j] == adventure) {
 					adventureX = i;
 					adventureY = j;
-				} else if (plane[i][j] == 'G') {
+				} else if (plane[i][j] == gold) {
 					goldX = i;
 					goldY = j;
 				}
@@ -132,6 +132,21 @@ public class DungeonGame {
 
 	}
 
+	public static int minStepsWithMonsterandPits(char[][] plane, char adventure, char gold) {
+		int possibleWithMonster = minStepsWithMonster(plane, adventure, gold);
+		int possibleWithPits = minStepsWithPits(plane, adventure, gold);
+		if (possibleWithMonster < 0 && possibleWithPits < 0) {
+			return -1;
+		} else if (possibleWithPits > possibleWithMonster) {
+			return -1;
+		} else if (possibleWithMonster < 0) {
+			return possibleWithPits;
+		} else if (possibleWithPits < 0) {
+			return possibleWithMonster;
+		}
+		return Math.min(possibleWithMonster, possibleWithPits);
+	}
+
 	public static void main(String[] args) {
 		char[][] plane = new char[5][4];
 
@@ -145,11 +160,11 @@ public class DungeonGame {
 		plane[4][0] = 'A';
 		plane[3][2] = 'G';
 		plane[2][0] = 'M';
-		int output2 = minStepsWithMonster(plane, 'A', 'G', 'M');
+		int output2 = minStepsWithMonster(plane, 'A', 'G');
 		System.out.println(output2 >= 0 ? ("Minimum Number of Steps : " + output2) : ("No Possible Solution"));
 		System.out.println();
 
-		List<List<Integer>> output3 = minStepPath(plane, 'A', 'G', 'M');
+		List<List<Integer>> output3 = minStepPath(plane, 'A', 'G');
 		if (output3 != null) {
 			System.out.println("Minimum Number of Steps : " + (output3.size() - 1));
 			int i = 0;
@@ -169,7 +184,7 @@ public class DungeonGame {
 		plane[1][2] = 'G';
 		plane[2][0] = 'M';
 		plane[3][3] = 'T';
-		int output4 = minStepwithTrigger(plane, 'A', 'G', 'M', 'T');
+		int output4 = minStepwithTrigger(plane, 'A', 'G');
 		System.out.println("Minimum Number of Steps : " + output4);
 		System.out.println();
 
@@ -182,8 +197,19 @@ public class DungeonGame {
 		plane[3][1] = 'P';
 		plane[3][2] = 'P';
 		plane[4][0] = 'P';
-		int output5 = minStepsWithPits(plane);
+		int output5 = minStepsWithPits(plane, 'A', 'G');
 		System.out.println(output5 >= 0 ? ("Minimum Number of Steps : " + output5) : ("No Possible Solution"));
 		System.out.println();
+
+		plane = new char[5][4];
+		plane[3][0] = 'A';
+		plane[2][3] = 'G';
+		plane[0][0] = 'M';
+		plane[1][0] = 'P';
+		plane[3][2] = 'P';
+		int output6 = minStepsWithMonsterandPits(plane, 'A', 'G');
+		System.out.println(output6 >= 0 ? ("Minimum Number of Steps : " + output6) : ("No Possible Solution"));
+		System.out.println();
 	}
+
 }

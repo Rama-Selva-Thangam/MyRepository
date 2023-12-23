@@ -92,8 +92,49 @@ public class DungeonGame {
 		return adventureStep;
 	}
 
+	public static int minStepsWithPits(char[][] plane) {
+		int rows = plane.length;
+		int cols = plane[0].length;
+		int adventureX = -1, adventureY = -1;
+		int goldX = -1, goldY = -1;
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (plane[i][j] == 'A') {
+					adventureX = i;
+					adventureY = j;
+				} else if (plane[i][j] == 'G') {
+					goldX = i;
+					goldY = j;
+				}
+			}
+		}
+
+		if (adventureX == -1 || goldX == -1) {
+			return -1;
+		}
+		int steps = 0;
+		while (adventureX != goldX || adventureY != goldY) {
+			if (adventureX < goldX && (adventureX + 1 < rows) && plane[adventureX + 1][adventureY] != 'P') {
+				adventureX++;
+			} else if (adventureX > goldX && (adventureX - 1 >= 0) && plane[adventureX - 1][adventureY] != 'P') {
+				adventureX--;
+			} else if (adventureY < goldY && (adventureY + 1 < cols) && plane[adventureX][adventureY + 1] != 'P') {
+				adventureY++;
+			} else if (adventureY > goldY && (adventureY - 1 >= 0) && plane[adventureX][adventureY - 1] != 'P') {
+				adventureY--;
+			} else {
+				return -1;
+			}
+			steps++;
+		}
+
+		return steps;
+
+	}
+
 	public static void main(String[] args) {
 		char[][] plane = new char[5][4];
+
 		plane[4][0] = 'A';
 		plane[0][3] = 'G';
 		int output1 = minSteps(plane, 'A', 'G');
@@ -130,5 +171,19 @@ public class DungeonGame {
 		plane[3][3] = 'T';
 		int output4 = minStepwithTrigger(plane, 'A', 'G', 'M', 'T');
 		System.out.println("Minimum Number of Steps : " + output4);
+		System.out.println();
+
+		plane = new char[5][4];
+		plane[3][0] = 'A';
+		plane[1][2] = 'G';
+		plane[1][0] = 'P';
+		plane[2][0] = 'P';
+		plane[2][1] = 'P';
+		plane[3][1] = 'P';
+		plane[3][2] = 'P';
+		plane[4][0] = 'P';
+		int output5 = minStepsWithPits(plane);
+		System.out.println(output5 >= 0 ? ("Minimum Number of Steps : " + output5) : ("No Possible Solution"));
+		System.out.println();
 	}
 }

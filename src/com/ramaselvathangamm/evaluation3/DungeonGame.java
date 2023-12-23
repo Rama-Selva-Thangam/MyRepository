@@ -147,6 +147,18 @@ public class DungeonGame {
 		return Math.min(possibleWithMonster, possibleWithPits);
 	}
 
+	public static int minStepsWithMonsterandPitsandTriggers(char[][] plane, char adventure, char gold) {
+		int minStepWithoutTrigger = minStepsWithMonsterandPits(plane, adventure, gold);
+		int minStepWithtrigger = minStepwithTrigger(plane, adventure, gold);
+		if (minStepWithoutTrigger < 0) {
+			return minStepWithtrigger;
+		}
+		if (minStepWithoutTrigger > 0) {
+			return Math.min(minStepWithoutTrigger, minStepWithtrigger);
+		}
+		return -1;
+	}
+
 	public static void main(String[] args) {
 		char[][] plane = new char[5][4];
 
@@ -210,6 +222,17 @@ public class DungeonGame {
 		int output6 = minStepsWithMonsterandPits(plane, 'A', 'G');
 		System.out.println(output6 >= 0 ? ("Minimum Number of Steps : " + output6) : ("No Possible Solution"));
 		System.out.println();
-	}
 
+		plane = new char[5][4];
+		plane[3][0] = 'A';
+		plane[0][2] = 'G';
+		plane[0][0] = 'M';
+		plane[3][3] = 'T';
+		plane[1][0] = 'P';
+		plane[3][1] = 'P';
+		plane[3][2] = 'P';
+		int output7 = minStepsWithMonsterandPitsandTriggers(plane, 'A', 'G');
+		System.out.println(output7 >= 0 ? ("Minimum Number of Steps : " + output7) : ("No Possible Solution"));
+		System.out.println();
+	}
 }

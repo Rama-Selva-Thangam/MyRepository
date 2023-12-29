@@ -2,6 +2,7 @@ package com.ramaselvathangamm.evaluation3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class DungeonGame {
 	public static int minSteps(char[][] plane, char adventure, char gold) {
@@ -160,22 +161,69 @@ public class DungeonGame {
 	}
 
 	public static void main(String[] args) {
-		char[][] plane = new char[5][4];
+		question3();
+	}
 
-		plane[4][0] = 'A';
-		plane[0][3] = 'G';
+	private static void question1() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
 		int output1 = minSteps(plane, 'A', 'G');
 		System.out.println("Minimum Number of Steps : " + output1);
 		System.out.println();
+	}
 
-		plane = new char[5][4];
-		plane[4][0] = 'A';
-		plane[3][2] = 'G';
-		plane[2][0] = 'M';
-		int output2 = minStepsWithMonster(plane, 'A', 'G');
-		System.out.println(output2 >= 0 ? ("Minimum Number of Steps : " + output2) : ("No Possible Solution"));
+	private static void question2() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		System.out.print("Enter the Monster Position : ");
+		int monsterX = scan.nextInt();
+		int monsterY = scan.nextInt();
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
+		plane[monsterX - 1][monsterY - 1] = 'M';
+		int output1 = minStepsWithMonster(plane, 'A', 'G');
+		System.out.println(output1 >= 0 ? ("Minimum Number of Steps : " + output1) : ("No Possible Solution"));
 		System.out.println();
+	}
 
+	private static void question3() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		System.out.print("Enter the Monster Position : ");
+		int monsterX = scan.nextInt();
+		int monsterY = scan.nextInt();
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
+		plane[monsterX - 1][monsterY - 1] = 'M';
 		List<List<Integer>> output3 = minStepPath(plane, 'A', 'G');
 		if (output3 != null) {
 			System.out.println("Minimum Number of Steps : " + (output3.size() - 1));
@@ -190,49 +238,93 @@ public class DungeonGame {
 		}
 		System.out.println();
 		System.out.println();
+	}
 
-		plane = new char[5][4];
-		plane[3][0] = 'A';
-		plane[1][2] = 'G';
-		plane[2][0] = 'M';
-		plane[3][3] = 'T';
-		int output4 = minStepwithTrigger(plane, 'A', 'G');
-		System.out.println("Minimum Number of Steps : " + output4);
+	private static void question4() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		System.out.print("Enter the Monster Position : ");
+		int monsterX = scan.nextInt();
+		int monsterY = scan.nextInt();
+		System.out.print("Enter the Trigger Position : ");
+		int triggerX = scan.nextInt();
+		int triggerY = scan.nextInt();
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
+		plane[monsterX - 1][monsterY - 1] = 'M';
+		plane[triggerX - 1][triggerY - 1] = 'T';
+		int output1 = minStepwithTrigger(plane, 'A', 'G');
+		System.out.println(output1 >= 0 ? ("Minimum Number of Steps : " + output1) : ("No Possible Solution"));
 		System.out.println();
+	}
 
-		plane = new char[5][4];
-		plane[3][0] = 'A';
-		plane[1][2] = 'G';
-		plane[1][0] = 'P';
-		plane[2][0] = 'P';
-		plane[2][1] = 'P';
-		plane[3][1] = 'P';
-		plane[3][2] = 'P';
-		plane[4][0] = 'P';
-		int output5 = minStepsWithPits(plane, 'A', 'G');
-		System.out.println(output5 >= 0 ? ("Minimum Number of Steps : " + output5) : ("No Possible Solution"));
+	private void question5() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		System.out.print("Enter the Number of Pits : ");
+		int noOfPits = scan.nextInt();
+		for (int i = 0; i < noOfPits; i++) {
+			System.out.print("Enter Pit " + (i + 1) + "Position : ");
+			int pitX = scan.nextInt();
+			int pitY = scan.nextInt();
+			plane[pitX - 1][pitY - 1] = 'P';
+
+		}
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
+		int output1 = minStepwithTrigger(plane, 'A', 'G');
+		System.out.println(output1 >= 0 ? ("Minimum Number of Steps : " + output1) : ("No Possible Solution"));
 		System.out.println();
+	}
 
-		plane = new char[5][4];
-		plane[3][0] = 'A';
-		plane[2][3] = 'G';
-		plane[0][0] = 'M';
-		plane[1][0] = 'P';
-		plane[3][2] = 'P';
-		int output6 = minStepsWithMonsterandPits(plane, 'A', 'G');
-		System.out.println(output6 >= 0 ? ("Minimum Number of Steps : " + output6) : ("No Possible Solution"));
-		System.out.println();
+	private static void question6() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the Row X Column : ");
+		int row = scan.nextInt();
+		int col = scan.nextInt();
+		char[][] plane = new char[row][col];
+		System.out.print("Enter Adventure Position : ");
+		int adventureX = scan.nextInt();
+		int adventureY = scan.nextInt();
+		System.out.print("Enter the Gold Position : ");
+		int goldX = scan.nextInt();
+		int goldY = scan.nextInt();
+		System.out.print("Enter the Monster Position : ");
+		int monsterX = scan.nextInt();
+		int monsterY = scan.nextInt();
+		System.out.print("Enter the Number of Pits : ");
+		int noOfPits = scan.nextInt();
+		for (int i = 0; i < noOfPits; i++) {
+			System.out.print("Enter Pit " + (i + 1) + "Position : ");
+			int pitX = scan.nextInt();
+			int pitY = scan.nextInt();
+			plane[pitX - 1][pitY - 1] = 'P';
 
-		plane = new char[5][4];
-		plane[3][0] = 'A';
-		plane[0][2] = 'G';
-		plane[0][0] = 'M';
-		plane[3][3] = 'T';
-		plane[1][0] = 'P';
-		plane[3][1] = 'P';
-		plane[3][2] = 'P';
-		int output7 = minStepsWithMonsterandPitsandTriggers(plane, 'A', 'G');
-		System.out.println(output7 >= 0 ? ("Minimum Number of Steps : " + output7) : ("No Possible Solution"));
+		}
+		plane[adventureX - 1][adventureY - 1] = 'A';
+		plane[goldX - 1][goldY - 1] = 'G';
+		plane[monsterX - 1][monsterY - 1] = 'M';
+
+		int output1 = minStepsWithMonsterandPits(plane, 'A', 'G');
+		System.out.println(output1 >= 0 ? ("Minimum Number of Steps : " + output1) : ("No Possible Solution"));
 		System.out.println();
 	}
 }

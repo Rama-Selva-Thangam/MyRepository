@@ -24,6 +24,10 @@ class PerformOperationsViewModel {
 		return Repository.getInstance().addSubRole(subRoleName, reportingRoleName);
 	}
 
+	int deleteRole(String deletedRole, String transferedRole) {
+		return Repository.getInstance().deleteRole(deletedRole,transferedRole);
+	}
+
 	List<String> displayRole() {
 		return Repository.getInstance().displayRoles();
 	}

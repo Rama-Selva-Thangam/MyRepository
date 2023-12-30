@@ -6,7 +6,7 @@ public class RoleHierarchy {
 
 	public static void main(String[] args) {
 		RoleHierarchy roleHierarchy = new RoleHierarchy();
-		roleHierarchy.question_3();
+		roleHierarchy.question_4();
 	}
 
 	private void question_1() {
@@ -19,5 +19,9 @@ public class RoleHierarchy {
 
 	private void question_3() {
 		new PerformOperationsView().displayRole();
+	}
+
+	private void question_4() {
+		new PerformOperationsView().deleteRole();
 	}
 }

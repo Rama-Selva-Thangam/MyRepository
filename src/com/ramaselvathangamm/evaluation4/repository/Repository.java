@@ -68,7 +68,8 @@ public class Repository {
 			transferChildRoles(deletedRoleId, transferredRoleId);
 			updateParentOfTransferredRoles(deletedRoleId, transferredRoleId);
 			String deleteQuery = "DELETE FROM Heirarchy WHERE roleID = ?";
-			try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+			try {
+				PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
 				deleteStatement.setInt(1, deletedRoleId);
 				int affectedRows = deleteStatement.executeUpdate();
 
@@ -114,7 +115,8 @@ public class Repository {
 
 	private void updateParentOfTransferredRoles(int deletedRoleId, int transferredRoleId) {
 		String updateParentQuery = "UPDATE Heirarchy SET reportingOfficer = ? WHERE reportingOfficer = ?";
-		try (PreparedStatement updateParentStatement = connection.prepareStatement(updateParentQuery)) {
+		try {
+			PreparedStatement updateParentStatement = connection.prepareStatement(updateParentQuery);
 			updateParentStatement.setInt(1, getReportingOfficer(deletedRoleId));
 			updateParentStatement.setInt(2, transferredRoleId);
 			updateParentStatement.executeUpdate();

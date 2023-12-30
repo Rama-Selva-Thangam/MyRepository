@@ -30,17 +30,6 @@ class DbHandler {
 		}
 	}
 
-	private void createDataBase() {
-		String query = "CREATE DATABASE IF NOT EXISTS role_hierarchy";
-		try {
-			Statement statement = connection.createStatement();
-			boolean created = statement.execute(query);
-			System.out.println(created);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private static void createHeirarchyTable() {
 		try {
 			String query = "CREATE TABLE IF NOT EXISTS Heirarchy (" + "roleID INT PRIMARY KEY AUTO_INCREMENT,"
@@ -49,12 +38,6 @@ class DbHandler {
 
 			Statement statement = connection.createStatement();
 			boolean created = statement.execute(query);
-
-			if (created) {
-				System.out.println("Heirarchy table created successfully.");
-			} else {
-				System.out.println("Heirarchy table already exists.");
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -77,12 +60,6 @@ class DbHandler {
 
 			Statement statement = connection.createStatement();
 			boolean created = statement.execute(query);
-
-			if (created) {
-				System.out.println("Employees table created successfully.");
-			} else {
-				System.out.println("Employees table already exists.");
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

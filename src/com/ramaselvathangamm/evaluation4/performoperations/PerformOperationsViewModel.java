@@ -20,8 +20,8 @@ class PerformOperationsViewModel {
 		}
 	}
 
-	int addSubRole(String parentRoleName, String subRoleName) {
-		return Repository.getInstance().addSubRole(parentRoleName, subRoleName);
+	int addSubRole(String subRoleName, String reportingRoleName) {
+		return Repository.getInstance().addSubRole(subRoleName, reportingRoleName);
 	}
 
 	List<String> displayRole() {

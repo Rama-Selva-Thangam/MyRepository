@@ -48,13 +48,13 @@ public class Repository {
 		}
 	}
 
-	public int addSubRole(String parentRoleName, String subRoleName) {
-		if (roleExists(parentRoleName)) {
+	public int addSubRole(String subRoleName, String reportingRole) {
+		if (roleExists(reportingRole)) {
 			if (!roleExists(subRoleName)) {
 				String query = "INSERT INTO Heirarchy (role_name, reportingOfficer) VALUES (?, ?)";
 				try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 					preparedStatement.setString(1, subRoleName);
-					preparedStatement.setInt(2, getRoleId(parentRoleName));
+					preparedStatement.setInt(2, getRoleId(reportingRole));
 					int affectedRows = preparedStatement.executeUpdate();
 
 					if (affectedRows > 0) {
@@ -95,7 +95,7 @@ public class Repository {
 		try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
 
 			while (resultSet.next()) {
-				res.add(resultSet.getString("role_name") + ", ");
+				res.add(resultSet.getString("role_name"));
 			}
 
 		} catch (SQLException e) {

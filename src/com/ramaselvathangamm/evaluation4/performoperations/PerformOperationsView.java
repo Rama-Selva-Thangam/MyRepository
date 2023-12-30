@@ -21,13 +21,37 @@ public class PerformOperationsView {
 
 	public void addSubRole() {
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Enter parent role name: ");
-		String parentRoleName = scan.nextLine().trim();
+		int operation;
+		do {
+			System.out.println("\nOperations:");
+			System.out.println("1. Add Sub Role\n0.Exit");
+			System.out.print("Operation to be performed: ");
+			operation = scan.nextInt();
+			scan.nextLine();
+			switch (operation) {
+			case 1:
+				add();
+				break;
+			case 2:
+				displayRole();
+				break;
+			default:
+				System.out.println("Invalid operation.");
+			}
+
+		} while (operation != 0);
+
+	}
+
+	private void add() {
+		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter sub role name: ");
 		String subRoleName = scan.nextLine().trim();
-		int status = performOperationsViewModel.addSubRole(parentRoleName, subRoleName);
+		System.out.print("Enter reporting role name: ");
+		String reportingRoleName = scan.nextLine().trim();
+		int status = performOperationsViewModel.addSubRole(subRoleName, reportingRoleName);
 		if (status == 0) {
-			displayRole();
+			System.out.println(subRoleName + "  " + reportingRoleName);
 		} else {
 			System.out.println("Failed to add sub-role.");
 		}
@@ -35,7 +59,7 @@ public class PerformOperationsView {
 
 	private void displayRole() {
 		for (String s : performOperationsViewModel.displayRole()) {
-			System.out.println(s);
+			System.out.print(s + " ");
 		}
 
 	}

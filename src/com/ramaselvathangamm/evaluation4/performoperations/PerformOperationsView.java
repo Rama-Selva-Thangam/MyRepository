@@ -35,6 +35,8 @@ public class PerformOperationsView {
 			case 2:
 				displayRole();
 				break;
+			case 0:
+				break;
 			default:
 				System.out.println("Invalid operation.");
 			}
@@ -57,9 +59,9 @@ public class PerformOperationsView {
 		}
 	}
 
-	private void displayRole() {
-		for (String s : performOperationsViewModel.displayRole()) {
-			System.out.print(s + " ");
+	public void displayRole() {
+		for (String role : performOperationsViewModel.displayRole()) {
+			System.out.println(role);
 		}
 
 	}

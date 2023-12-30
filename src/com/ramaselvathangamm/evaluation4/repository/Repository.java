@@ -92,8 +92,9 @@ public class Repository {
 	public List<String> displayRoles() {
 		String query = "SELECT role_name FROM Heirarchy";
 		List<String> res = new ArrayList<String>();
-		try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-
+		try {
+			Statement statement = connection.createStatement(); 
+			ResultSet resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				res.add(resultSet.getString("role_name"));
 			}

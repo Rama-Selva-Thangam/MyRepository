@@ -6,13 +6,18 @@ public class RoleHierarchy {
 
 	public static void main(String[] args) {
 		RoleHierarchy roleHierarchy = new RoleHierarchy();
-		roleHierarchy.question_2();
+		roleHierarchy.question_3();
 	}
 
 	private void question_1() {
 		new PerformOperationsView().createRootRole();
 	}
+
 	private void question_2() {
 		new PerformOperationsView().addSubRole();
+	}
+
+	private void question_3() {
+		new PerformOperationsView().displayRole();
 	}
 }

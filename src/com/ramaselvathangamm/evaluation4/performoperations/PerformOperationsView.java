@@ -21,68 +21,6 @@ public class PerformOperationsView {
 
 	public void addSubRole() {
 		Scanner scan = new Scanner(System.in);
-		int operation;
-		do {
-			System.out.println("\nOperations:");
-			System.out.println("1. Add Sub Role\n0.Exit");
-			System.out.print("Operation to be performed: ");
-			operation = scan.nextInt();
-			scan.nextLine();
-			switch (operation) {
-			case 1:
-				add();
-				break;
-			case 2:
-				displayRole();
-				break;
-			case 0:
-				break;
-			default:
-				System.out.println("Invalid operation.");
-			}
-
-		} while (operation != 0);
-
-	}
-
-	public void deleteRole() {
-		Scanner scan = new Scanner(System.in);
-		int operation;
-		do {
-			System.out.println("\nOperations:");
-			System.out.println("1. Add Sub Role\n2.Display Roles\n3.Delete Roles\n0.Exit");
-			System.out.print("Operation to be performed: ");
-			operation = scan.nextInt();
-			scan.nextLine();
-			switch (operation) {
-			case 1:
-				add();
-				break;
-			case 2:
-				displayRole();
-				break;
-			case 3:
-				delete();
-				break;
-			case 0:
-				break;
-			default:
-				System.out.println("Invalid operation.");
-			}
-
-		} while (operation != 0);
-
-	}
-
-	public void displayRole() {
-		for (String role : performOperationsViewModel.displayRole()) {
-			System.out.println(role);
-		}
-
-	}
-
-	private void add() {
-		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter sub role name: ");
 		String subRoleName = scan.nextLine().trim();
 		System.out.print("Enter reporting role name: ");
@@ -95,7 +33,7 @@ public class PerformOperationsView {
 		}
 	}
 
-	private void delete() {
+	public void deleteRole() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter the role to be deleted : ");
 		String deleteRole = scan.nextLine().trim();
@@ -106,6 +44,40 @@ public class PerformOperationsView {
 			System.out.println(deleteRole + " Role Deleted and Properties Transfered to " + transferedRole);
 		} else {
 			System.out.println("Not Deleted");
+		}
+
+	}
+
+	public void assignRole() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter the User Name : ");
+		String userName = scan.nextLine().trim();
+		System.out.print("Enter the role name : ");
+		String userRole = scan.nextLine().trim();
+		int status = performOperationsViewModel.addUser(userName, userRole);
+		if (status == 0) {
+			System.out.println(userName + " " + userRole);
+		} else {
+			System.out.println("User not found");
+		}
+	}
+
+	public void displayRole() {
+		for (String role : performOperationsViewModel.displayRole()) {
+			System.out.println(role);
+		}
+
+	}
+
+	public void displayUsers() {
+		for (String user : performOperationsViewModel.displayUsers()) {
+			System.out.println(user);
+		}
+	}
+
+	public void displayUsersandSubUsers() {
+		for (String user : performOperationsViewModel.displayUsersandSubUsers()) {
+			System.out.println(user);
 		}
 	}
 

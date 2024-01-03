@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Repository {
 	private static Repository repository;
@@ -159,7 +161,8 @@ public class Repository {
 
 	private boolean roleExists(String roleName) {
 		String query = "SELECT * FROM Heirarchy WHERE role_name = ?";
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, roleName);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			return resultSet.next();
@@ -167,6 +170,95 @@ public class Repository {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public int addUser(String userName, String userRole) {
+		int roleID = getRoleId(userRole);
+		if (roleID != -1) {
+			String query = "INSERT INTO employees (employeeName, roleID) VALUES (?, ?)";
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+				preparedStatement.setString(1, userName);
+				preparedStatement.setInt(2, roleID);
+				int affectedRows = preparedStatement.executeUpdate();
+
+				if (affectedRows > 0) {
+					return 0;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			return 1;
+		}
+
+		return -1;
+	}
+
+	public List<String> displayUsers() {
+		String query = "SELECT employeeName, role_name FROM employees "
+				+ "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID";
+		List<String> users = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+
+			while (resultSet.next()) {
+				String userName = resultSet.getString("employeeName");
+				String roleName = resultSet.getString("role_name");
+				users.add(userName + " - " + roleName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+
+	public List<String> displayUsersandSubUsers() {
+		String query = "SELECT employeeName, role_name FROM employees "
+				+ "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID";
+
+		Map<String, List<String>> usersWithSubUsers = new HashMap<>();
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				String userName = resultSet.getString("employeeName");
+				String roleName = resultSet.getString("role_name");
+
+				List<String> subUsers = getSubUsers(roleName);
+				usersWithSubUsers.put(userName, subUsers);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		List<String> result = new ArrayList<>();
+		for (Map.Entry<String, List<String>> entry : usersWithSubUsers.entrySet()) {
+			String userWithSubUsers = entry.getKey() + " - " + String.join(", ", entry.getValue());
+			result.add(userWithSubUsers);
+		}
+
+		return result;
+	}
+
+	private List<String> getSubUsers(String roleName) {
+		List<String> subUsers = new ArrayList<>();
+		String query = "SELECT employeeName FROM employees " + "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID "
+				+ "WHERE reportingOfficer = (SELECT roleID FROM Heirarchy WHERE role_name = ?)";
+
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+			preparedStatement.setString(1, roleName);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				subUsers.add(resultSet.getString("employeeName"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return subUsers;
 	}
 
 }

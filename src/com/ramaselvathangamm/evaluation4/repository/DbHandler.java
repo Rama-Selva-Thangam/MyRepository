@@ -43,15 +43,6 @@ class DbHandler {
 		}
 	}
 
-	public void insertRole(String roleName, Integer reportingOfficer) throws SQLException {
-		String insertQuery = "INSERT INTO Heirarchy (role_name, reportingOfficer) VALUES (?, ?)";
-		try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-			preparedStatement.setString(1, roleName);
-			preparedStatement.setObject(2, reportingOfficer);
-			preparedStatement.executeUpdate();
-		}
-	}
-
 	private static void createEmployeeTable() {
 		try {
 			String query = "CREATE TABLE IF NOT EXISTS employees (" + "employeeID INT AUTO_INCREMENT PRIMARY KEY,"

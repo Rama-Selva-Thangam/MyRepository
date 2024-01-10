@@ -41,7 +41,7 @@ class PerformOperationsViewModel {
 	}
 
 	public List<String> displayUsersandSubUsers() {
-		return Repository.getInstance().displayUsersandSubUsers();
+		return Repository.getInstance().displayUserswithSubUsers();
 	}
 
 }

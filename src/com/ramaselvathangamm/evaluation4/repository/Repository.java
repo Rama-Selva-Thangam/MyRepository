@@ -213,52 +213,55 @@ public class Repository {
 		return users;
 	}
 
-	public List<String> displayUsersandSubUsers() {
-		String query = "SELECT employeeName, role_name FROM employees "
-				+ "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID";
+	public List<String> displayUserswithSubUsers() {
+	    String query = "SELECT employeeName, role_name FROM employees "
+	            + "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID";
 
-		Map<String, List<String>> usersWithSubUsers = new HashMap<>();
+	    Map<String, List<String>> usersWithSubUsers = new HashMap<>();
 
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
-			while (resultSet.next()) {
-				String userName = resultSet.getString("employeeName");
-				String roleName = resultSet.getString("role_name");
+	    try {
+	        Statement statement = connection.createStatement();
+	        ResultSet resultSet = statement.executeQuery(query);
+	        while (resultSet.next()) {
+	            String userName = resultSet.getString("employeeName");
+	            String roleName = resultSet.getString("role_name");
 
-				List<String> subUsers = getSubUsers(roleName);
-				usersWithSubUsers.put(userName, subUsers);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	            List<String> subUsers = getSubUsers(userName, roleName);
+	            usersWithSubUsers.put(userName, subUsers);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-		List<String> result = new ArrayList<>();
-		for (Map.Entry<String, List<String>> entry : usersWithSubUsers.entrySet()) {
-			String userWithSubUsers = entry.getKey() + " - " + String.join(", ", entry.getValue());
-			result.add(userWithSubUsers);
-		}
+	    List<String> result = new ArrayList<>();
+	    for (Map.Entry<String, List<String>> entry : usersWithSubUsers.entrySet()) {
+	        String userWithSubUsers = entry.getKey() + " - " + String.join(", ", entry.getValue());
+	        result.add(userWithSubUsers);
+	    }
 
-		return result;
+	    return result;
 	}
 
-	private List<String> getSubUsers(String roleName) {
-		List<String> subUsers = new ArrayList<>();
-		String query = "SELECT employeeName FROM employees " + "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID "
-				+ "WHERE reportingOfficer = (SELECT roleID FROM Heirarchy WHERE role_name = ?)";
+	private List<String> getSubUsers(String userName, String roleName) {
+	    List<String> subUsers = new ArrayList<>();
+	    String query = "SELECT employeeName FROM employees " +
+	            "JOIN Heirarchy ON employees.roleID = Heirarchy.roleID " +
+	            "WHERE reportingOfficer = (SELECT roleID FROM Heirarchy WHERE role_name = ?)";
 
-		try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			preparedStatement.setString(1, roleName);
-			ResultSet resultSet = preparedStatement.executeQuery();
+	    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setString(1, roleName);
+	        ResultSet resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-				subUsers.add(resultSet.getString("employeeName"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	        while (resultSet.next()) {
+	            String subUserName = resultSet.getString("employeeName");
+	            if (!subUserName.equals(userName)) {
+	                subUsers.add(subUserName);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-		return subUsers;
+	    return subUsers;
 	}
-
 }

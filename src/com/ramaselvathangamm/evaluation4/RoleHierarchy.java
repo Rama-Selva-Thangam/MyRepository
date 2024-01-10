@@ -54,6 +54,10 @@ public class RoleHierarchy {
 				performOperationsView.displayUsersandSubUsers();
 				System.out.println("--------------------------------------------");
 				break;
+			case 8:
+				performOperationsView.displayUsersandSubUsers();
+				System.out.println("--------------------------------------------");
+				break;
 
 			case 0:
 				break;
